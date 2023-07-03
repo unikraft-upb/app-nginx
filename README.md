@@ -51,6 +51,54 @@ $ sudo mkdir /etc/qemu/
 $ echo "allow all" | sudo tee /etc/qemu/bridge.conf
 ```
 
+## The Quick Way Up
+
+Configuring, building and running a Unikraft application depends on our choice of platform and architecture.
+Currently, supported platforms are QEMU (KVM), Xen and linuxu.
+QEMU (KVM) is known to be working, so we focus on that.
+Supported architectures are x86_64 and AArch64.
+
+In order to quickly get everything running, you can use the `run-x86_64` / `run-aarch64` make targets in the `Makefile.app` file.
+These will set up, configure, build and run everything.
+
+```console
+$ make -f Makefile.app run-x86_64
+Cloning into '/home/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/.unikraft/unikraft'...
+remote: Enumerating objects: 18927, done.
+[...]
+make[1]: Entering directory '/media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/.unikraft/unikraft'
+  LN      Makefile
+  MKDIR   lxdialog
+  MAKE    kconfig
+/usr/bin/gcc -ldl -I. -I/media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/build/kconfig -DCONFIG_=\"\"   -c fixdep.c -o /media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/build/kconfig/o
+/usr/bin/gcc -ldl -I. -I/media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/build/kconfig -DCONFIG_=\"\"   /media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/build/kconfig/fixdep.o -o /mep
+#
+# configuration written to /media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/.config
+#
+make[1]: Leaving directory '/media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/.unikraft/unikraft'
+make[1]: Entering directory '/media/stefan/projects/unikraft/scripts/workdir/apps/app-nginx/.unikraft/unikraft'
+  GEN     libsyscall_shim: provided_syscalls.h.in.new
+  CP      config
+  WGET    libmusl: https://www.musl-libc.org/releases/musl-1.2.3.tar.gz
+  HOSTLN  libmusl: core: include/sys/types.h
+  HOSTLN  libmusl: core: include/sys/param.h
+[...]
+SeaBIOS (version rel-1.16.2-0-gea1b7a073390-prebuilt.qemu.org)
+
+iPXE (http://ipxe.org) 00:04.0 CA00 PCI2.10 PnP PMM+06FD0FF0+06F30FF0 CA00
+
+Booting from ROM..1: Set IPv4 address 172.44.0.2 mask 255.255.255.0 gw 172.44.0.1
+en1: Added
+en1: Interface is up
+Powered by
+o.   .o       _ _               __ _
+Oo   Oo  ___ (_) | __ __  __ _ ' _) :_
+oO   oO ' _ `| | |/ /  _)' _` | |_|  _)
+oOo oOO| | | | |   (| | | (_) |  _) :_
+ OoOoO ._, ._:_:_,\_._,  .__,_:_, \___)
+                  Atlas 0.13.1~5eb820bd
+```
+
 ## Set Up
 
 The following repositories are required for Nginx:
